@@ -1,0 +1,16 @@
+{
+  "private": true,
+  "workspaces": [
+    "apps/*"
+  ],
+  "scripts": {
+    "dev": "turbo dev",
+    "build": "turbo build",
+    "clean": "turbo clean && rm -rf node_modules",
+    "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,md}\" --ignore-path .gitignore"
+  },
+  "devDependencies": {
+    "turbo": "^1.10.16",
+    "prettier": "^3.1.0"
+  }
+}
