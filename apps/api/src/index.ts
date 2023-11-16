@@ -1,16 +1,10 @@
 import { Hono } from "hono";
-import { Scrap } from "../functions/spider";
 import { cors } from "hono/cors";
+import { Scrap } from "../functions/spider";
 
 const app = new Hono();
 
-app.use(
-  "/*",
-  cors({
-    origin: "*",
-    allowMethods: ["GET"],
-  })
-);
+app.use("/*", cors({ origin: "*", allowMethods: ["GET"] }));
 
 app.get("/", (context) =>
   context.text(`

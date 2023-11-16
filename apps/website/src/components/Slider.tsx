@@ -4,7 +4,7 @@ import useSWR from "swr";
 const URL =
   process.env.NODE_ENV === "development"
     ? "http://0.0.0.0:8787"
-    : "https://dunker.jeremy-e05.workers.dev";
+    : "https://dunker.zavbala.workers.dev";
 
 const Slider = () => {
   const { data, isLoading } = useSWR(
