@@ -17,9 +17,10 @@ jobs:
       - name: Deploy
         uses: cloudflare/wrangler-action@v3
         with:
-          command: "deploy"
-          packageManager: "pnpm"
-          wranglerVersion: "* -w"
-          environment: "production"
-          workingDirectory: "apps/api"
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          workingDirectory: "apps/api"
+          wranglerVersion: "* -w"
+          packageManager: "pnpm"
+          environment: "production"
+          command: "deploy"
