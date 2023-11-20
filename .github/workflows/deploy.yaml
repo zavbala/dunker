@@ -26,4 +26,4 @@ jobs:
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           workingDirectory: "apps/api"
           wranglerVersion: "* -w"
-          command: "deploy --minify src/index.ts"
+          command: "deploy --minify src/index.ts --compatibility-date 2023-11-20"
