@@ -19,11 +19,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Install Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: "16.x"
-
       - name: Deploy
         uses: cloudflare/wrangler-action@v3
         with:
@@ -31,5 +26,4 @@ jobs:
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           workingDirectory: "apps/api"
           wranglerVersion: "* -w"
-          environment: "production"
           command: "deploy"
