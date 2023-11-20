@@ -19,6 +19,7 @@ jobs:
         with:
           command: "deploy"
           packageManager: "pnpm"
+          wranglerVersion: "* -w"
           environment: "production"
           workingDirectory: "apps/api"
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
