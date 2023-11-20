@@ -18,5 +18,7 @@ jobs:
         uses: cloudflare/wrangler-action@v3
         with:
           command: "deploy"
+          packageManager: "pnpm"
+          environment: "production"
           workingDirectory: "apps/api"
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
