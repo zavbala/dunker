@@ -1,7 +1,7 @@
-import { parse } from "node-html-parser";
-import { DRIBBBLE } from "../lib/constants";
+import { HTMLElement } from "node-html-parser";
 
 type Args = {
+  page?: string;
   path: "/search" | "/shots/popular" | string;
   // tag?:
   //   | "animation"
@@ -12,46 +12,47 @@ type Args = {
   //   | "product-design"
   //   | "typography"
   //   | "web-design";
-  page?: string;
 };
 
-export const Scrap = async ({ path, page }: Args) => {
-  const query = new URLSearchParams({ page: page || "1" });
+export const resolver = (
+  nodes: HTMLElement[],
+  schema: Record<string, string>,
+) => {
+  const output: Record<string, HTMLElement> | any[] = [];
 
-  const URL = DRIBBBLE + path + "?" + query.toString();
+  for (const node of nodes) {
+    const item = {};
 
-  const result = await fetch(URL, { headers: { "Content-Type": "text/html" } });
+    for (const [key, value] of Object.entries(schema)) {
+      // @ts-ignore
+      item[key] = node.querySelector(value);
+    }
 
-  const html = await result.text();
-  const root = parse(html);
-
-  const output = [];
-  const shots = root.querySelectorAll("li.shot-thumbnail-container");
-
-  for (const shot of shots) {
-    const image = shot.querySelector("img")?.getAttribute("data-src");
-
-    const link =
-      DRIBBBLE +
-      shot.querySelector("a.shot-thumbnail-link")?.getAttribute("href");
-
-    const upvotes = shot.querySelector("js-shot-likes-count")?.innerText;
-
-    const author = {
-      displayName: shot.querySelector("div.user-information span")?.innerText,
-
-      avatar: shot
-        .querySelector("div.user-information img")
-        ?.getAttribute("data-src"),
-
-      username: shot
-        .querySelector("div.user-information a")
-        ?.getAttribute("href")
-        ?.split("/")[1],
-    };
-
-    output.push({ image, link, upvotes, author });
+    output.push(item);
   }
 
   return output;
 };
+
+type Shot = {
+  views: string;
+  link: string;
+  upvotes: string;
+  image: string;
+  username: string;
+  displayName: string;
+  avatar: string;
+};
+
+export const define = (shots: Record<string, HTMLElement>[]) =>
+  shots.map((item) => ({
+    views: item.views.innerText.trim(),
+    link: item.link.getAttribute("href"),
+    upvotes: item.upvotes?.innerText.trim(),
+    image: item.image.getAttribute("data-src"),
+    author: {
+      displayName: item.displayName.innerText,
+      avatar: item.avatar.getAttribute("data-src"),
+      username: item.username?.getAttribute("href")?.split("/")[1],
+    },
+  }));
