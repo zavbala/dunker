@@ -2,4 +2,16 @@
 layout: "../layouts/base.astro"
 ---
 
-Terms
+import Text from "../components/Text.astro"
+import Heading from "../components/Heading.astro"
+
+export const components = {
+    p: Text,
+    h1: Heading,
+}
+
+import Legal from "../layouts/legal.astro"
+
+<Legal>
+
+</Legal>

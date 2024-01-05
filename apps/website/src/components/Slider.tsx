@@ -1,10 +1,6 @@
-import { motion } from "framer-motion";
 import useSWR from "swr";
 
-const URL =
-  process.env.NODE_ENV === "development"
-    ? "http://0.0.0.0:8787"
-    : "https://dunker.zavbala.workers.dev";
+const URL = "https://api.dunker.app";
 
 const Slider = () => {
   const { data, isLoading } = useSWR(
@@ -13,16 +9,35 @@ const Slider = () => {
   );
 
   return (
-    <motion.div className="gap-3 flex flex-col overflow-y-scroll z-40 absolute h-3/4">
-      {data?.map((item: any) => (
-        <img
-          loading="lazy"
-          src={item.image}
-          alt={item.author.username}
-          onDragStart={(e) => e.preventDefault()}
-        />
-      ))}
-    </motion.div>
+    <div
+      id="slider"
+      className="flex items-center overflow-hidden z-40 max-w-7xl space-x-6"
+    >
+      <div className="flex space-x-6 animate-loop-scroll">
+        {data?.map((item: any) => (
+          <img
+            loading="lazy"
+            src={item.image}
+            draggable={false}
+            alt={item.author.username}
+            className="max-w-none inline-block"
+            onContextMenu={(e) => e.preventDefault()}
+          />
+        ))}
+      </div>
+
+      <div aria-hidden="true" className="flex space-x-6 animate-loop-scroll">
+        {data?.map((item: any) => (
+          <img
+            loading="lazy"
+            src={item.image}
+            draggable={false}
+            alt={item.author.username}
+            className="max-w-none inline-block"
+          />
+        ))}
+      </div>
+    </div>
   );
 };
 

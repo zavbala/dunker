@@ -1,5 +1,6 @@
 * {
   scrollbar-width: none;
+  /* outline: 1px solid red; */
 }
 
 *::-webkit-scrollbar {
@@ -9,4 +10,8 @@
 ::selection {
   color: black;
   background: yellow;
+}
+
+#slider {
+  will-change: transform;
 }

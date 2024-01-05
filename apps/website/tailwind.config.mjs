@@ -4,7 +4,17 @@ export default {
   theme: {
     extend: {
       fontFamily: {
+        bebas: ["Bebas Neue", "sans-serif"],
         mono: ["'JetBrains Mono Variable'", "monospace"],
+      },
+      animation: {
+        "loop-scroll": "loop-scroll 35s linear infinite",
+      },
+      keyframes: {
+        "loop-scroll": {
+          from: { transform: "translateX(0)" },
+          to: { transform: "translateX(-100%)" },
+        },
       },
     },
   },

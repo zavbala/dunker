@@ -2,4 +2,31 @@
 layout: "../layouts/base.astro"
 ---
 
-Privacy
+import Legal from "../layouts/legal.astro"
+import Text from "../components/Text.astro"
+import Heading from "../components/Heading.astro"
+
+export const components = {
+    p: Text,
+    h1: Heading,
+}
+
+
+<Legal lastModified="2024-01-10">
+
+# Information Collection and Use
+
+Our App does not collect any personal information, including but not limited to names, email addresses, or any other identifiable information. We are committed to maintaining your privacy and ensuring that your personal information remains secure.
+
+# Log Data
+
+We want to inform you that whenever you use our App, in a case of an error, we may collect data and information (through third-party products) on your phone called Log Data. 
+This Log Data may include information such as your device's Internet Protocol ("IP") address, device name, operating system version, configuration of the app when utilizing our App, the time and date of your use of the App, and other statistics.
+
+# Images and Content
+
+The primary purpose of our App is to provide a seamless interface for users to view images from Dribbble. 
+Our App does not store, transmit, or otherwise process any images or content. All images and content are directly fetched from Dribbble servers and are displayed within the App for your convenience.
+
+
+</Legal>
