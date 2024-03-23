@@ -11,13 +11,13 @@ const Slider = () => {
   return (
     <div
       id="slider"
-      className="flex items-center overflow-hidden z-40 max-w-7xl space-x-6"
+      className="flex items-center overflow-hidden z-40 space-x-6 select-none"
     >
       <div className="flex space-x-6 animate-loop-scroll">
         {data?.map((item: any) => (
           <img
             loading="lazy"
-            src={item.image}
+            src={item.image + "?resize=400x300"}
             draggable={false}
             alt={item.author.username}
             className="max-w-none inline-block"
@@ -30,7 +30,7 @@ const Slider = () => {
         {data?.map((item: any) => (
           <img
             loading="lazy"
-            src={item.image}
+            src={item.image + "?resize=400x300"}
             draggable={false}
             alt={item.author.username}
             className="max-w-none inline-block"
