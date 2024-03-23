@@ -16,7 +16,7 @@ type Args = {
 
 export const resolver = (
   nodes: HTMLElement[],
-  schema: Record<string, string>,
+  schema: Record<string, string>
 ) => {
   const output: Record<string, HTMLElement> | any[] = [];
 
@@ -35,24 +35,31 @@ export const resolver = (
 };
 
 type Shot = {
-  views: string;
   link: string;
-  upvotes: string;
   image: string;
+  views: string;
+  avatar: string;
+  upvotes: string;
   username: string;
   displayName: string;
-  avatar: string;
 };
 
 export const define = (shots: Record<string, HTMLElement>[]) =>
-  shots.map((item) => ({
-    views: item.views.innerText.trim(),
-    link: item.link.getAttribute("href"),
-    upvotes: item.upvotes?.innerText.trim(),
-    image: item.image.getAttribute("data-src"),
-    author: {
-      displayName: item.displayName.innerText,
-      avatar: item.avatar.getAttribute("data-src"),
-      username: item.username?.getAttribute("href")?.split("/")[1],
-    },
-  }));
+  shots.map((item) => {
+    const link = item.link.getAttribute("href");
+
+    return {
+      link,
+      views: item.views.innerText.trim(),
+      upvotes: item.upvotes?.innerText.trim(),
+      id: link?.split("/shots/")[1].split("-")[0],
+      image: (
+        item.image?.getAttribute("data-src") || item.image?.getAttribute("src")
+      )?.split("?")[0],
+      author: {
+        displayName: item.displayName.innerText,
+        avatar: item.avatar.getAttribute("data-src")?.split("?")[0],
+        username: item.username?.getAttribute("href")?.split("/")[1],
+      },
+    };
+  });

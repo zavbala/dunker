@@ -3,6 +3,7 @@ dist
 .dev.vars
 node_modules
 
+.html
 yarn.lock
 wrangler.toml
 pnpm-lock.yaml
