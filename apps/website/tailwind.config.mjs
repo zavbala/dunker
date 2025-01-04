@@ -7,6 +7,9 @@ export default {
         bebas: ["Bebas Neue", "sans-serif"],
         mono: ["'JetBrains Mono Variable'", "monospace"],
       },
+      gridTemplateColumns: {
+        24: "repeat(24, minmax(0, 1fr))",
+      },
       animation: {
         "loop-scroll": "loop-scroll 35s linear infinite",
       },

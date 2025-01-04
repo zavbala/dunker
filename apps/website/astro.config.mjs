@@ -5,10 +5,16 @@ import tailwind from "@astrojs/tailwind";
 import vercel from "@astrojs/vercel/static";
 import { defineConfig } from "astro/config";
 
+import svelte from "@astrojs/svelte";
+
 // https://astro.build/config
 export default defineConfig({
   output: "static",
   site: "https://dunker.app",
-  integrations: [tailwind(), sitemap(), mdx(), react()],
-  adapter: vercel({ webAnalytics: { enabled: true } }),
+  integrations: [tailwind(), sitemap(), mdx(), react(), svelte()],
+  adapter: vercel({
+    webAnalytics: {
+      enabled: true
+    }
+  })
 });
